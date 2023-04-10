@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class DAO {
 	/** Modulo de conexão **/
@@ -24,6 +25,21 @@ public class DAO {
 		}
 
 	}
+	/** CRUD CREATE **/ 
+	public void InserirContatos(JavaBeans contato) {
+		String create = "Insert into contados (nome,fone,email) values (?,?,?)";
+		try {
+			//abrir a conexao com o banco 
+			Connection con = conectar();
+			//preparar a query para execuçao no banco de dados 
+			PreparedStatement pst  = con.prepareStatement(create);
+		} catch (Exception e) {
+			System.out.println(e);
+			
+		}
+
+	}
+	
 
 	/* teste de conexao
 	public void testeConexao() {

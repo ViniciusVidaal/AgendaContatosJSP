@@ -43,16 +43,20 @@ public Controller() {
 	//novoContato
 	protected void novoContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect("agenda.jsp");
-		//teste de recebimento dos dados do formulario
+		/*teste de recebimento dos dados do formulario
 		System.out.println(request.getParameter("nome"));
 		System.out.println(request.getParameter("fone"));
 		System.out.println(request.getParameter("email"));
+		*/
+		
 		//setar as variaveis javabeans
 		
 		contato.setNome(request.getParameter("nome"));
 		contato.setFone(request.getParameter("fone"));
 		contato.setEmail(request.getParameter("email"));
 		
+		// invocar o metodo inserirContato passando o objeto contato
+		dao.InserirContatos(contato);	
 	}
 
 }
