@@ -10,7 +10,7 @@ public class DAO {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://127.0.0.1:3306/dbagenda?useTimezone=true&serverTimezone=UTC";
 	private String user = "root";
-	private String password = "91977690";
+	private String password = "";
 	// metodo de conexao
 
 	private Connection conectar() {
@@ -25,31 +25,39 @@ public class DAO {
 		}
 
 	}
-	/** CRUD CREATE **/ 
+
+	/** CRUD CREATE **/
 	public void InserirContatos(JavaBeans contato) {
 		String create = "Insert into contados (nome,fone,email) values (?,?,?)";
 		try {
-			//abrir a conexao com o banco 
+			// abrir a conexao com o banco
 			Connection con = conectar();
-			//preparar a query para execuçao no banco de dados 
-			PreparedStatement pst  = con.prepareStatement(create);
+			// preparar a query para execuçao no banco de dados
+			PreparedStatement pst = con.prepareStatement(create);
+			// substituir os paramêTROS (?) pelo conteudo das variaveis JavaBeans
+
+			pst.setString(1, contato.getNome());
+			pst.setString(2, contato.getFone());
+			pst.setString(3, contato.getEmail());
+
+			// executar a query
+			pst.executeUpdate();
+			// encerrando a conexao com o banco
+			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
-			
+
 		}
 
 	}
 	
+	
+	// CRUD READ // 
+	
 
-	/* teste de conexao
-	public void testeConexao() {
-		try {
-			Connection con = conectar();
-			System.out.println(con);
-			con.close();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	*/
-	}
-
+	/*
+	 * teste de conexao public void testeConexao() { try { Connection con =
+	 * conectar(); System.out.println(con); con.close(); } catch (Exception e) {
+	 * System.out.println(e); }
+	 */
+}
