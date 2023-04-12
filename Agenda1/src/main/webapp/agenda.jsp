@@ -19,13 +19,14 @@
 <body>
  	<h1>Agenda de Contatos </h1>
  	<a href = "Novo.html" class = "Botao1">Novo Contato</a>
- 	<table id ="tabela" >
+ 	<table id = "tabela" >
 		<thead> 
 			<tr>
 				<th>Id</th>
 				<th>Nome</th>
 				<th>Fone</th>
 				<th>E-Mail</th>
+				<th>Opções</th>
 			</tr>
 		</thead> 	
 		
@@ -38,6 +39,7 @@
 					<td><%=lista.get(i).getNome() %></td>
 					<td><%=lista.get(i).getFone() %></td>
 					<td><%=lista.get(i).getEmail() %></td>
+					<td><a href="select?idcon=<%=lista.get(i).getIdcon()%>" class="Botao1">Editar</a></td>
 					
 				</tr>
 			

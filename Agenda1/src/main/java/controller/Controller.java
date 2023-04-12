@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/insert" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/select" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();
@@ -31,9 +31,10 @@ public class Controller extends HttpServlet {
 			contatos(request, response);
 		} else if (action.equals("/insert")) {
 			novoContato(request, response);
-
+		} else if (action.equals("/select")) {
+			listarContato(request, response);
 		} else {
-			response.sendRedirect("agenda.jsp");
+			response.sendRedirect("index.html");
 		}
 
 		// Teste de conexao
@@ -45,14 +46,12 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		// criando um objeto que irá receber os dados JavaBeans
 		ArrayList<JavaBeans> lista = dao.listarContatos();
-		
-		//encaminhar a lista ao documento agenda.jsp
+
+		// encaminhar a lista ao documento agenda.jsp
 		request.setAttribute("contatos", lista);
 		RequestDispatcher rd = request.getRequestDispatcher("agenda.jsp");
 		rd.forward(request, response);
-		
-		
-		
+
 		/*
 		 * teste para ver se a lista esta recebendo os contatos normalmente for(int i =
 		 * 0; i < lista.size(); i++) { System.out.println(lista.get(i).getIdcon());
@@ -60,7 +59,7 @@ public class Controller extends HttpServlet {
 		 * System.out.println(lista.get(i).getFone());
 		 * System.out.println(lista.get(i).getEmail()); }
 		 * 
-		*/
+		 */
 	}
 
 	// novoContato
@@ -86,5 +85,17 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("main");
 
 	}
+	
+	//editar contatos
+	protected void listarContato(HttpServletRequest request, HttpServletResponse response) {
+		String idcon = request.getParameter("idcon");
+		//setando a variavel JavaBeans
+		contato.setIdcon(idcon);
+		
+		
+		// usar system para saber se ta funcionando direitinho quando clico no botao editar 
+		System.out.println(idcon);
+	}
+
 
 }
